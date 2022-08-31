@@ -18,6 +18,15 @@ router.get('/:true', async(req, res, next) => {
     res.status(200).json(helpedTrue);
 });
 
+router.get('/:false', async(req, res, next) => {
+    const helpedTrue = await prisma.helped.findMany({
+        where: {
+            check: false,
+        }
+    })
+    res.status(200).json(helpedTrue);
+});
+
 router.post('/', async(req, res, next) => {
     const helped = await prisma.helped.create({
         data: req.body,
