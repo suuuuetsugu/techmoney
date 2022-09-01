@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Nav from "react-bootstrap/Nav";
 import styles from "../../styles/Home.module.css";
+import axios from "axios";
 
 export default function Header() {
   return (
@@ -10,6 +11,11 @@ export default function Header() {
         <Nav.Item>
           <Nav.Link style={{ color: "black" }} href="/">
             カレンダー
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link style={{ color: "black" }} href="/new">
+            今日のおてつだい
           </Nav.Link>
         </Nav.Item>
         <Nav.Item>
