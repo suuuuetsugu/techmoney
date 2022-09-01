@@ -21,7 +21,7 @@ router.post("/", async (req, res, next) => {
 });
 
 router.delete("/:id", async (req, res, next) => {
-  const id = req.params.id;
+  const id = req.params;
   const delHelp = await prisma.helpedList.delete({
     where: {
       id: Number(id),

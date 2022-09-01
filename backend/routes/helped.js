@@ -9,22 +9,28 @@ router.get('/', async(req, res, next) => {
     res.status(200).json(helpedAll);
 });
 
-router.get('/:true', async(req, res, next) => {
+router.get('/true', async(req, res, next) => {
     const helpedTrue = await prisma.helped.findMany({
         where: {
             check: true,
-        }
+        },
+        include: {
+            helpList: true
+        } 
     })
     res.status(200).json(helpedTrue);
 });
 
-router.get('/:false', async(req, res, next) => {
-    const helpedTrue = await prisma.helped.findMany({
+router.get('/false', async(req, res, next) => {
+    const helpedFalse = await prisma.helped.findMany({
         where: {
             check: false,
-        }
+        },
+        include: {
+          helpList: true
+        } 
     })
-    res.status(200).json(helpedTrue);
+    res.status(200).json(helpedFalse);
 });
 
 router.post('/', async(req, res, next) => {
