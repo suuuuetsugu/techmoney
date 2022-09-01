@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+// import "@fullcalendar/common/main.css";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
