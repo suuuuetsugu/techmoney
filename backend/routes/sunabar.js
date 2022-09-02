@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const request = require('request')
-const logger = require("../log/winston-setup");
 
 router.post('/', async(req, res, next) => {
-    logger.info('Info sunabar start');
     console.log('body', req.body);
 
     var options = {
@@ -24,10 +22,9 @@ router.post('/', async(req, res, next) => {
     request(options, function (error, res) {
       console.log('req', req.body);
       if (error) throw new Error(error);
-    //   console.log('res',res);
+      console.log('res',res);
     });
 
-    logger.info('Info sunabar end');
 });
 
 module.exports = router;
