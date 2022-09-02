@@ -143,24 +143,26 @@ export default function New(props) {
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-6">承認待ちお手伝い</h1>
       </div>
-      <div class="row">
-        <div class="col-4">日付</div>
-        <div class="col-4">お手伝い</div>
-        <div class="col-4">金額</div>
-      </div>
+      {/* <div class="row"> */}
+      <a class="m-5">日付</a>
+      <a class="m-5">お手伝い</a>
+      <a class="m-5">金額</a>
+      {/* </div> */}
       <div class="row">
         {props.noCheck.map((check) => {
           return (
             <ul class="list-unstyled mt-3 mb-4" key={check.id}>
-              <div class="col-4">{check.day}</div>
-              {check.helpList.name}
-              <a>{check.helpList.money}円</a>
-              <Button
-                class="btn btn-lg btn-block btn-primary"
-                onClick={() => approveHelped(check.id, check.helpList.money)}
-              >
-                承認
-              </Button>
+              <div class="col-4 m-2">
+                <a class="m-4">{check.day}</a>
+                {check.helpList.name}
+                <a class="m-2">{check.helpList.money}円</a>
+                <Button
+                  class="btn btn-lg btn-block btn-primary "
+                  onClick={() => approveHelped(check.id, check.helpList.money)}
+                >
+                  承認
+                </Button>
+              </div>
             </ul>
           );
         })}

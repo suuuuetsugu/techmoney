@@ -42,9 +42,7 @@ export default function List(props) {
               <h4 class="my-0 font-weight-normal">じぶんのお金</h4>
             </div>
             <div class="card-body">
-              <h1 class="card-title pricing-card-title">
-                ￥{henkanKo}
-              </h1>
+              <h1 class="card-title pricing-card-title">￥{henkanKo}</h1>
             </div>
           </div>
         </div>
@@ -69,8 +67,8 @@ export default function List(props) {
                         >
                           {value}
                         </Button>
-                        {item.name}
-                        <a>{item.money}円</a>
+                        <a class="m-4">{item.name}</a>
+                        <a class="m-4">{item.money}円</a>
                       </div>
                     </ul>
                   </div>
