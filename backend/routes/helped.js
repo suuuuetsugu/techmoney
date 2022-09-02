@@ -41,6 +41,7 @@ router.post('/', async(req, res, next) => {
 });
 
 router.patch('/:id', async(req, res, next) => {
+    logger.info('Info helpd patch start');
     const { id } = req.params
     const helped = await prisma.helped.update({
         where: {
@@ -49,6 +50,7 @@ router.patch('/:id', async(req, res, next) => {
         data: req.body
     })
     res.status(200).json(helped);
+    logger.info('Info helpd patch end');
 });
 
 module.exports = router;
