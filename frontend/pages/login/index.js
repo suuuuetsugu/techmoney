@@ -125,7 +125,7 @@ export default function Signin(props) {
             </div>
           </div>
           <div className={styles.login}>
-            <Button class="btn btn-lg btn-block btn-primary">
+            <Button class="btn btn-lg btn-block btn-primary ">
               <Link href="/login/check">承認ページへ行く</Link>
             </Button>
           </div>
@@ -191,7 +191,7 @@ function SignOutButton() {
   return (
     <div className={styles.login}>
       <Button
-        class="btn btn-lg btn-block btn-primary"
+        class="btn btn-lg btn-block btn-secondary"
         onClick={() => auth.signOut()}
       >
         <Link href="/login">サインアウト</Link>

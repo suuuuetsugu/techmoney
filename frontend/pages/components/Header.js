@@ -8,9 +8,9 @@ export default function Header() {
       <h1 className="text-center mt-2 mb-2">
         <img
           alt=""
-          src="/てっくま.png"
-          width="80"
-          height="70"
+          src="/techma.png"
+          width="45"
+          height="50"
           className="d-inline-block align-top"
         />{" "}
         テックmoney
