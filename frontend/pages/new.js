@@ -21,7 +21,6 @@ export default function List(props) {
         console.log(res);
         console.log("ok");
         alert("えらいね！はなまる");
-        setValue("申請中");
       })
       .catch((e) => {
         console.log(e);

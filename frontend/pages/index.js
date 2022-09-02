@@ -4,13 +4,34 @@ import Header from "./components/Header";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import jaLocale from "@fullcalendar/core/locales/ja";
+// import interactionPlugin from "@fullcalendar/interaction";
+// import dynamic from "next/dynamic";
+
+function event() {
+  const array = [];
+  const todayObj = {};
+
+  const titleArray = ["よくできました", "えらいね", "いつもありがとう"];
+  const random = Math.floor(Math.random() * titleArray.length);
+  console.log(titleArray[random]);
+
+  todayObj["title"] = titleArray[random];
+  console.log(todayObj);
+
+  todayObj["start"] = "2022-09-02";
+  console.log(todayObj);
+
+  array.push(todayObj);
+  return array;
+}
+console.log(event());
 
 export default function Home(props) {
-  const [date, setDate] = useState(new Date());
+  // const [date, setDate] = useState(new Date());
 
-  const onChange = (date) => {
-    setDate(date);
-  };
+  // const onChange = (date) => {
+  //   setDate(date);
+  // };
 
   return (
     <>
@@ -19,12 +40,12 @@ export default function Home(props) {
 
       <div>
         {" "}
-        <div>貯金：{props.spAccountBalances[1].odBalance}円</div>
+        <div>じぶんのお金：{props.spAccountBalances[1].odBalance}円</div>
         <div>
           <FullCalendar
             plugins={[dayGridPlugin]}
             locale={jaLocale}
-            events={[{ title: "よくできました", start: "2022-09-01" }]}
+            events={event()}
           />
         </div>
       </div>
