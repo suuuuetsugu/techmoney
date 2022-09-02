@@ -1,52 +1,51 @@
-import axios from 'axios';
+import axios from "axios";
 import Header from "../components/Header";
-import Button from 'react-bootstrap/Button';
-import Table from 'react-bootstrap/Table';
-import Link from 'next/link'
+import Button from "react-bootstrap/Button";
+import Table from "react-bootstrap/Table";
+import Link from "next/link";
 
 export async function getServerSideProps(context) {
-
   // 自作API
   let noCheck = {};
   await axios
-  .get('http://express:3000/helped/false')
-  .then(function (response) {
-    if(response.data) {
-      noCheck = response.data
-      console.log(JSON.stringify(response.data));
-    }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+    .get("http://express:3000/helped/false")
+    .then(function (response) {
+      if (response.data) {
+        noCheck = response.data;
+        console.log(JSON.stringify(response.data));
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   // sunabarAPI
   // TODO:sunabarAPIのトークンはenvファイルに記載
   let balance = {};
   await axios
-  .get('https://api.sunabar.gmo-aozora.com/personal/v1/accounts/balances', {
-      headers: { 
-          'Accept': 'application/json;charset=UTF-8', 
-          'Content-Type': 'application/json;charset=UTF-8', 
-          'x-access-token': 'YjMwZjAzZjg3M2RhNTkzMTBiMWUwZTZl'
+    .get("https://api.sunabar.gmo-aozora.com/personal/v1/accounts/balances", {
+      headers: {
+        Accept: "application/json;charset=UTF-8",
+        "Content-Type": "application/json;charset=UTF-8",
+        "x-access-token": "YjMwZjAzZjg3M2RhNTkzMTBiMWUwZTZl",
+      },
+    })
+    .then(function (response) {
+      if (response.data) {
+        balance = response.data;
+        console.log(JSON.stringify(response.data));
       }
-  })
-  .then(function (response) {
-      if(response.data) {
-          balance = response.data
-          console.log(JSON.stringify(response.data));
-      }
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-  
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   return {
     props: {
       balance,
       noCheck,
-    }
-  }
+    },
+  };
 }
 
 // ページリロード
@@ -55,37 +54,36 @@ setTimeout(function () {
 }, 10000);
 
 export default function New(props) {
-  
-  const approveHelped = async(id, money) => {
-    
-    window.alert("お手伝いを承認して、つかいわけ口座間振込依頼を行いました \n 振込後の金額を確認する場合はページを更新してください");
-    
+  const approveHelped = async (id, money) => {
+    window.alert(
+      "お手伝いを承認して、つかいわけ口座間振込依頼を行いました \n 振込後の金額を確認する場合はページを更新してください"
+    );
+
     // 承認状況をfalseからtrueへ変更
     await axios
-    .patch(`http://localhost:3001/helped/${id}`, {
-      check: true
-    })
-    .then(function (response) {
-      if(response.data) {
-        console.log(JSON.stringify(response.data));
-      }
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .patch(`http://localhost:3001/helped/${id}`, {
+        check: true,
+      })
+      .then(function (response) {
+        if (response.data) {
+          console.log(JSON.stringify(response.data));
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // ページリロード
     location.reload();
-  
+
     // sunabarAPIで口座間振替
     await axios.post(`http://localhost:3001/sunabar`, {
-      "depositSpAccountId":"SP50220278928",
-      "debitSpAccountId":"SP30210005043",
-      "currencyCode":"JPY",
-      "paymentAmount": money,
+      depositSpAccountId: "SP50220278928",
+      debitSpAccountId: "SP30210005043",
+      currencyCode: "JPY",
+      paymentAmount: money,
     });
-
-  }
+  };
 
   // 金額表示のための変数
   const allZandaka = props.balance.balances[0].balance;
@@ -99,16 +97,16 @@ export default function New(props) {
   const changeDatetime = (datetime) => {
     // console.log(datetime)
     const ts = Date.parse(datetime.day);
-    const dt = new Date(ts)
+    const dt = new Date(ts);
     return dt;
-  }
+  };
 
   return (
     <>
       <Header />
       {console.log(typeof oyaZandaka)}
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">口座残高</h1>
+        <h1 class="display-6">口座残高</h1>
       </div>
       <div class="container">
         <div class="card-deck mb-3 text-center">
@@ -120,7 +118,7 @@ export default function New(props) {
               <h1 class="card-title pricing-card-title">￥{henkanOya}</h1>
             </div>
           </div>
-          
+
           <div class="card mb-4 shadow-sm">
             <div class="card-header">
               <h4 class="my-0 font-weight-normal">お子さんの口座（子口座）</h4>
@@ -131,30 +129,41 @@ export default function New(props) {
                 <li>お小遣いやお年玉を分けて管理したい場合は</li>
                 <li>つかいわけ口座を増やすことができます</li>
               </ul>
-              <a href='https://portal.sunabar.gmo-aozora.com/login' class="btn btn-lg btn-block btn-primary" role="button">sunabarへ行く</a>
+              <a
+                href="https://portal.sunabar.gmo-aozora.com/login"
+                class="btn btn-lg btn-block btn-primary"
+                role="button"
+              >
+                sunabarへ行く
+              </a>
             </div>
           </div>
         </div>
       </div>
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-        <h1 class="display-4">承認待ちお手伝い</h1>
+        <h1 class="display-6">承認待ちお手伝い</h1>
       </div>
       <div class="row">
         <div class="col-4">日付</div>
         <div class="col-4">お手伝い</div>
         <div class="col-4">金額</div>
       </div>
-      <div>
-          {props.noCheck.map((check) => {
-            return (
-              <ul class="list-unstyled mt-3 mb-4" key={check.id}>
-                <li>{check.day}</li>
-                <li>{check.helpList.name}</li>
-                <li>{check.helpList.money}円</li>
-                <Button variant="outline-danger" onClick={() => approveHelped(check.id, check.helpList.money) }>承認</Button>
-              </ul>
-            )
-          })}
+      <div class="row">
+        {props.noCheck.map((check) => {
+          return (
+            <ul class="list-unstyled mt-3 mb-4" key={check.id}>
+              <div class="col-4">{check.day}</div>
+              {check.helpList.name}
+              <a>{check.helpList.money}円</a>
+              <Button
+                class="btn btn-lg btn-block btn-primary"
+                onClick={() => approveHelped(check.id, check.helpList.money)}
+              >
+                承認
+              </Button>
+            </ul>
+          );
+        })}
       </div>
       {/* <Table hover striped bordered>
       <thead>
@@ -179,5 +188,5 @@ export default function New(props) {
       </tbody>
       </Table> */}
     </>
-  )
+  );
 }

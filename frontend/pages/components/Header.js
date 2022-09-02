@@ -1,12 +1,20 @@
 import Head from "next/head";
 import Nav from "react-bootstrap/Nav";
 import styles from "../../styles/Home.module.css";
-import axios from "axios";
 
 export default function Header() {
   return (
     <>
-      <h1 className="text-center mt-2 mb-2">おてつだい</h1>
+      <h1 className="text-center mt-2 mb-2">
+        <img
+          alt=""
+          src="/てっくま.png"
+          width="80"
+          height="70"
+          className="d-inline-block align-top"
+        />{" "}
+        テックmoney
+      </h1>
       <Nav className={styles.Header}>
         <Nav.Item>
           <Nav.Link style={{ color: "black" }} href="/">
