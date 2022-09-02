@@ -37,15 +37,21 @@ export default function Signin(props) {
       console.log(res);
       console.log("ok");
     });
+
+    location.reload();
   }
 
-  function deleteTask(id) {
-    console.log(id);
-    axios.delete(`http://localhost:3000/helps/${id}`).then((res) => {
-      console.log("del ok");
-      console.log(res);
-    });
-  }
+  // setTimeout(function () {
+  //   location.reload();
+  // }, 5000);
+
+  // function deleteTask(id) {
+  //   console.log(id);
+  //   axios.delete(`http://localhost:3000/helps/${id}`).then((res) => {
+  //     console.log("del ok");
+  //     console.log(res);
+  //   });
+  // }
 
   return (
     <>
@@ -53,46 +59,76 @@ export default function Signin(props) {
         <>
           {console.log(props)}
           <Header />
-          <h3>管理画面</h3>
-          <div>
-            <form>
-              <label>新規お手伝い：</label>
-              <input
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-              <label>
-                金額：
-                <input
-                  type="text"
-                  onChange={(e) => setMoney(e.target.value)}
-                ></input>
-                円
-              </label>
-              <div>
-                <Button variant="outline-secondary" onClick={handleClick}>
-                  作成
-                </Button>
-              </div>
-            </form>
-            <label>今月のお手伝い：</label>
-            <ul>
-              {props.helpList.map((help, i) => {
-                return (
-                  <div key={i}>
-                    {help.name}
-                    <a>{help.money}円</a>
-                    {/* <Link href={`/${task.id}`}>👀詳細</Link>
-                      <Link href={`/${task.id}/edit`}>📝編集</Link> */}
-                    <Button onClick={() => deleteTask(help.id)}>削除</Button>
-                  </div>
-                );
-              })}
-            </ul>
+          <div
+            div
+            class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"
+          >
+            <h1 class="display-6">お手伝いリスト編集</h1>
           </div>
-          <Button variant="outline-secondary">
-            <Link href="/login/check">承認</Link>
-          </Button>
+          <div class="container">
+            <div class="card-deck mb-3 text-center">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">新規作成</h4>
+                </div>
+                <div class="card-body">
+                  <form>
+                    <label class="card-title pricing-card-title">
+                      お手伝い：
+                      <input
+                        type="text"
+                        onChange={(e) => setName(e.target.value)}
+                      ></input>
+                    </label>
+                    <label class="card-title pricing-card-title m-2">
+                      金額：
+                      <input
+                        type="text"
+                        onChange={(e) => setMoney(e.target.value)}
+                      ></input>
+                      円
+                    </label>
+
+                    <Button
+                      class="btn btn-lg btn-block btn-primary "
+                      onClick={handleClick}
+                    >
+                      作成
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="card-deck mb-3 text-center">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">現在のお手伝いリスト</h4>
+                </div>
+                <div class="card-body">
+                  <ul>
+                    {props.helpList.map((help, i) => {
+                      return (
+                        <div key={i}>
+                          {help.name}
+                          <a>{help.money}円</a>
+                          {/* <Link href={`/${task.id}`}>👀詳細</Link>
+                      <Link href={`/${task.id}/edit`}>📝編集</Link> */}
+                          {/* <Button onClick={() => deleteTask(help.id)}>削除</Button> */}
+                        </div>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styles.login}>
+            <Button class="btn btn-lg btn-block btn-primary">
+              <Link href="/login/check">承認ページへ行く</Link>
+            </Button>
+          </div>
 
           <SignOutButton />
         </>
@@ -124,22 +160,28 @@ function SignInButton() {
     <>
       <Header />
       <div>
+        <h1 class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+          サインインする
+        </h1>
         <form className={styles.login}>
           <label>email:</label>
           <input name="email" type="email" ref={emailRef} />
-          <label>password:</label>
+          <label class="sr-only">password:</label>
           <input name="password" type="password" ref={emailPassword} />
-          <Button
-            className={styles.login}
-            variant="outline-secondary"
-            onClick={handleSubmit}
-          >
-            サインイン
-          </Button>
+          <div className={styles.login}>
+            <Button
+              class="btn btn-lg btn-block btn-primary"
+              onClick={handleSubmit}
+            >
+              サインイン
+            </Button>
+          </div>
         </form>
-        <Button variant="outline-secondary" className={styles.login}>
-          <Link href="/">キャンセル</Link>
-        </Button>
+        <div className={styles.login}>
+          <Button class="btn btn-lg btn-block btn-primary">
+            <Link href="/">キャンセル</Link>
+          </Button>
+        </div>
       </div>
     </>
   );
@@ -147,13 +189,14 @@ function SignInButton() {
 
 function SignOutButton() {
   return (
-    <Button
-      className={styles.login}
-      variant="outline-secondary"
-      onClick={() => auth.signOut()}
-    >
-      <Link href="/login">サインアウト</Link>
-    </Button>
+    <div className={styles.login}>
+      <Button
+        class="btn btn-lg btn-block btn-primary"
+        onClick={() => auth.signOut()}
+      >
+        <Link href="/login">サインアウト</Link>
+      </Button>
+    </div>
   );
 }
 

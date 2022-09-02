@@ -11,28 +11,29 @@ function event() {
   const array = [];
   const todayObj = {};
 
-  const titleArray = ["よくできました", "えらいね", "いつもありがとう"];
-  const random = Math.floor(Math.random() * titleArray.length);
-  console.log(titleArray[random]);
+  const titleArray = [
+    { title: "よくできました", start: "2022-09-01" },
+    { title: "えらいね", start: "2022-09-02" },
+  ];
+  // const random = Math.floor(Math.random() * titleArray.length);
+  // console.log(titleArray[random]);
 
-  todayObj["title"] = titleArray[random];
-  console.log(todayObj);
+  // const dayArray = ["2022-08-31", "2022-09-01", "2022-09-02"];
 
-  todayObj["start"] = "2022-09-02";
-  console.log(todayObj);
+  // todayObj["title"] = titleArray[random];
+  // console.log(todayObj);
 
-  array.push(todayObj);
-  return array;
+  // for (const item of dayArray) {
+  //   console.log(item);
+  //   todayObj["start"] = item;
+  //   array.push(todayObj);
+  //   console.log(todayObj);
+  // }
+  return titleArray;
 }
 console.log(event());
 
 export default function Home(props) {
-  // const [date, setDate] = useState(new Date());
-
-  // const onChange = (date) => {
-  //   setDate(date);
-  // };
-
   return (
     <>
       {console.log(props)}
@@ -40,7 +41,21 @@ export default function Home(props) {
 
       <div>
         {" "}
-        <div>じぶんのお金：{props.spAccountBalances[1].odBalance}円</div>
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center"></div>
+        <div class="container">
+          <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">じぶんのお金</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">
+                  ￥{props.spAccountBalances[1].odBalance}
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
         <div>
           <FullCalendar
             plugins={[dayGridPlugin]}
@@ -59,7 +74,7 @@ const config = {
   headers: {
     Accept: "application/json;charset=UTF-8",
     "Content-Type": "application/json;charset=UTF-8",
-    "x-access-token": "MGRhOWJkOGRhNmFjYTc3ZjU2M2RjNWJh",
+    "x-access-token": "YjMwZjAzZjg3M2RhNTkzMTBiMWUwZTZl",
   },
 };
 
