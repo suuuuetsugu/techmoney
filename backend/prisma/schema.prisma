@@ -12,7 +12,7 @@ datasource db {
 
 model Helped {
   id         Int        @id @default(autoincrement())
-  day        DateTime
+  day        DateTime   @default(now())
   check      Boolean    @default(false)
   profile    Profile    @relation(fields: [profileId], references: [id])
   profileId  Int
