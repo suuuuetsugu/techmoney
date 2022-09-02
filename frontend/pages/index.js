@@ -34,6 +34,12 @@ function event() {
 console.log(event());
 
 export default function Home(props) {
+
+
+  // 金額表示のための変数
+  const koZandaka = props.spAccountBalances[1].odBalance;
+  const henkanKo = Number(koZandaka).toLocaleString();
+
   return (
     <>
       {console.log(props)}
@@ -50,7 +56,7 @@ export default function Home(props) {
               </div>
               <div class="card-body">
                 <h1 class="card-title pricing-card-title">
-                  ￥{props.spAccountBalances[1].odBalance}
+                  ￥{henkanKo}
                 </h1>
               </div>
             </div>
